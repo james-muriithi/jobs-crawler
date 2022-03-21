@@ -18,9 +18,16 @@ class SiteParser(Parser):
         except:
             return ''
 
+    def extract_job_type(self, div):
+        try:
+            return (div.find('span', attrs={'class', 'search-result__job-type'}).text.strip())
+        except:
+            return ''
+
     def extract_location(self, div):
         try:
-            return (div.find('div', attrs={'class', 'search-result__location'}).text)
+            return (div.find('div', attrs={'class', 'relative h-auto flex-col md:flex-row items-start md:items-center px-5'})
+                    .find('div', attrs={"class", "inline-block mr-2"}).text)
         except:
             return ''
 
@@ -47,21 +54,18 @@ class SiteParser(Parser):
     def extract_link(self, div):
         try:
             company = div.find(
-                name="a", attrs={"class", "search-result__job-title"})
+                name="a", attrs={"class", "break-words metrics-apply-now"})
             return (company.get('href'))
         except:
             return ''
 
     # extract date of job when it was posted
-
     def extract_date(self, div):
         try:
             company = div.find(
-                name="div", attrs={"class", "search-result__job-function"}).find(name="div", attrs={"class", "if-wrapper-column align-self--end text--right"})
-            if company is None:
-                company = div.find(
-                    name="div", attrs={"class", "search-result__job-function"}).find(name="div", attrs={"class", "top-jobs__content__time"})
-            return (company.text + " ago")
+                name="div", attrs={"class", "flex items-start py-2 px-5 mt-2 border-t border-gray-300"}).find(name="span", attrs={"class", "ml-auto"})
+            if company:
+                return (company.text + " ago")
         except:
             return ''
 

@@ -10,7 +10,7 @@ from utils import postJob
 
 class Crawler(ABC):
     # dataframe
-    df = pd.DataFrame(columns=['title', 'location', 'company', 'summary',
+    df = pd.DataFrame(columns=['title', 'location', 'company', 'job_type', 'summary',
                       'salary', 'link', 'post_date', 'full_text', 'fetch_date'])
 
     def __init__(self, parser: Parser):
@@ -30,6 +30,7 @@ class Crawler(ABC):
 
         divs = soup.find_all(name=jobElement, attrs=jobElementAttrs)
 
+
         # for all jobs on a page
         for div in divs:
             # specifying row num for index of job posting in dataframe
@@ -47,6 +48,9 @@ class Crawler(ABC):
 
             # grabbing company
             job_post.append(self.parser.extract_company(div))
+
+            # grabbing job type
+            job_post.append(self.parser.extract_job_type(div))
 
             # grabbing summary text
             job_post.append(self.parser.extract_summary(link))

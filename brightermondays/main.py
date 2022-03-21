@@ -19,11 +19,11 @@ class SiteCrawler(Crawler):
 
 
 def run():
-    domain = 'https://www.brightermonday.co.ke/jobs/it-software'
+    domain = 'https://www.brightermonday.co.ke/jobs/software-data'
     crawler = SiteCrawler()
 
-    crawler.scrap_jobs(domain, jobElement="article",
-                       jobElementAttrs={"class": "search-result"})
+    crawler.scrap_jobs(domain, jobElement="div",
+                       jobElementAttrs={"class": "mb-5 relative flex-col inline-flex bg-white w-full shadow-md rounded p-0"})
 
 
 if __name__ == "__main__":

@@ -19,7 +19,9 @@ class Parser(ABC):
     def extract_salary(self, div): 
         pass
         
-
+    @abstractmethod
+    def extract_job_type(self, div):
+        pass
 
     # extract job location
     @abstractmethod

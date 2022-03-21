@@ -9,33 +9,18 @@ from utils import postJob
 
 
 class Crawler(ABC):
-    # give the filename the name of the current folder
-    folder = os.path.join(os.getcwd(), 'jobs')
-
-    file_name = os.path.join(folder, 'brightermondays-' +
-                             datetime.now().strftime('%Y-%m-%d_%H-%M-%S')+'.csv')
-
-    @abstractproperty
-    def domain(self):
-        pass
-
     # dataframe
     df = pd.DataFrame(columns=['title', 'location', 'company', 'summary',
                       'salary', 'link', 'post_date', 'full_text', 'fetch_date'])
 
-    """
-    
-    """
-
     def __init__(self, parser: Parser):
         self.parser = parser
 
-    @abstractmethod
-    def scrap_jobs(self, jobElement: str, jobElementAttrs: object):
-        print('scrapping jobs from ' + self.domain + '....')
+    def scrap_jobs(self, url: str,  jobElement: str, jobElementAttrs: object):
+        print('scrapping jobs from ' + url + '....')
 
         # get dom
-        page = requests.get(self.domain)
+        page = requests.get(url)
 
         # ensuring at least 1 second between page grabs
         time.sleep(1)
@@ -84,7 +69,7 @@ class Crawler(ABC):
             # appending list of job post info to dataframe at index num
             self.df.loc[num] = job_post
 
-            postJob(self.df.loc[num].to_dict())
+            # postJob(self.df.loc[num].to_dict())
 
         self.saveCSV()
 

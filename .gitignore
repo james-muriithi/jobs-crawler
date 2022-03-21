@@ -1,4 +1,11 @@
-venv
-.idea
-__pycache__
+__pycache__/
+jobs/
+test.py
+
+# Environments
 .env
+.venv
+env/
+venv/
+ENV/
+log.txt

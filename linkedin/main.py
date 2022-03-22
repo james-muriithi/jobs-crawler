@@ -33,7 +33,7 @@ def run():
     for domain in pages:
         crawler.scrap_jobs(domain, jobElement="li",
                            jobElementAttrs={"class": "jobs-search-results__list-item"})
-        time.sleep(10)
+        time.sleep(3)
 
 
 if __name__ == "__main__":

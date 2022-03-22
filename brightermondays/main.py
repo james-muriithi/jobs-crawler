@@ -7,7 +7,8 @@ from app.crawler import Crawler
 
 class SiteCrawler(Crawler):
     # give the filename the name of the current folder
-    folder = os.path.join(os.getcwd(), 'jobs')
+    folder = os.path.join(os.path.dirname(
+        os.path.realpath(__file__)), 'jobs')
 
     file_name = os.path.join(folder, 'brightermondays-' +
                              datetime.now().strftime('%Y-%m-%d_%H-%M-%S')+'.csv')

@@ -10,7 +10,7 @@ class SiteCrawler(Crawler):
     folder = os.path.join(os.path.dirname(
         os.path.realpath(__file__)), 'jobs')
 
-    file_name = os.path.join(folder, 'ihub-' +
+    file_name = os.path.join(folder, 'myjobmag-' +
                              datetime.now().strftime('%Y-%m-%d_%H-%M-%S')+'.csv')
 
     site_parser = SiteParser()
@@ -20,11 +20,11 @@ class SiteCrawler(Crawler):
 
 
 def run():
-    domain = 'https://retro.ihub.co.ke/jobs'
+    domain = 'https://www.myjobmag.co.ke/jobs-by-field/information-technology'
     crawler = SiteCrawler()
 
-    crawler.scrap_jobs(domain, jobElement="div",
-                       jobElementAttrs={"class": "jobsboard-row"}, summaryInSamePage=True)
+    crawler.scrap_jobs(domain, jobElement="li",
+                       jobElementAttrs={"class": "job-list-li"}, summaryInSamePage=True)
 
 
 if __name__ == "__main__":

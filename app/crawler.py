@@ -16,7 +16,7 @@ class Crawler(ABC):
     def __init__(self, parser: Parser):
         self.parser = parser
 
-    def scrap_jobs(self, url: str,  jobElement: str, jobElementAttrs: object):
+    def scrap_jobs(self, url: str,  jobElement: str, jobElementAttrs: object, summaryInSamePage=False):
         print('scrapping jobs from ' + url + '....')
 
         # get dom
@@ -30,7 +30,6 @@ class Crawler(ABC):
 
         divs = soup.find_all(name=jobElement, attrs=jobElementAttrs)
 
-        print(soup)
         # for all jobs on a page
         for div in divs:
             # specifying row num for index of job posting in dataframe
@@ -53,7 +52,7 @@ class Crawler(ABC):
             job_post.append(self.parser.extract_job_type(div))
 
             # grabbing summary text
-            job_post.append(self.parser.extract_summary(link))
+            job_post.append(self.parser.extract_summary(link if not summaryInSamePage else div))
 
             # grabbing salary
             job_post.append(self.parser.extract_salary(div))

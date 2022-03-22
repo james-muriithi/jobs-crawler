@@ -30,7 +30,7 @@ class Crawler(ABC):
 
         divs = soup.find_all(name=jobElement, attrs=jobElementAttrs)
 
-
+        print(soup)
         # for all jobs on a page
         for div in divs:
             # specifying row num for index of job posting in dataframe

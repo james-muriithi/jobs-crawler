@@ -72,9 +72,9 @@ class Crawler(ABC):
             # appending list of job post info to dataframe at index num
             self.df.loc[num] = job_post
 
-            # postJob(self.df.loc[num].to_dict())
+            postJob(self.df.loc[num].to_dict())
 
-        self.saveCSV()
+        # self.saveCSV()
 
     def saveCSV(self):
         # saving df as a local csv file

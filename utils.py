@@ -7,13 +7,14 @@ token = config('API_TOKEN', default='')
 
 
 def postJob(data):
-    token = os.environ['ACCESS_TOKEN']
-    endpoint = os.environ['API_ENDPOINT']
+    token = config('ACCESS_TOKEN', default="")
+    endpoint = config('API_ENDPOINT', default='')
 
     try:
         x = requests.post(endpoint, headers={
-                          'Authorization': 'Bearer {}'.format(token)}, json=data)
-        print(x.json())
+                          'Authorization': 'Token {}'.format(token)}, json=data)
+        x.raise_for_status()
+        # print(x.json())
     except Exception as error:
         print(error)
         pass

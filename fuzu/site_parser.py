@@ -28,7 +28,7 @@ class SiteParser(Parser):
     def extract_job_title(self, div):
         try:
             return (div.find('div', attrs={'class', 'card-content'})
-                    .find('h6', attrs={"class": "title"}).find('a').text)
+                    .find('h6', attrs={"class": "title"}).text)
         except:
             return ''
 
@@ -64,7 +64,7 @@ class SiteParser(Parser):
 
             div = soup.find('div', attrs={
                 'class': 'view-main'}).find("div", attrs={"class": "styled__TabPanel-sc-1s1q1aa-4"})
-                
+
             return '\n'.join(div.stripped_strings)
         except:
             return ''
